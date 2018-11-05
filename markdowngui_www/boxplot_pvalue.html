@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>OpenCPU Markdown App</title>
+    
+<script src="underscore-min.js"></script>    
+<script src="jquery-1.10.2.min.js"></script>
+<script src="opencpu-0.5.js"></script>
+<script src="src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+$(function(){
+  ocpu.seturl("http://opencpu.bxgenomics.com/ocpu/library/markdowngui/R");
+//  ocpu.seturl("http://bigdata.biogen.com/ocpu/library/markdowngui/R");
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/r");
+  editor.getSession().setUseWrapMode(true);
+  editor.setFontSize("14px");
+
+  //This app requires OpenCPU 1.0.1 or higher!
+  
+  function domarkdown(e){
+    var req = ocpu.call("rmdtext", {
+      text : editor.getSession().getValue()
+    }, function(session){
+console.log(session);
+console.log(session.getFileURL("output.html"));
+      $("iframe").attr('src', session.getFileURL("output.html"));     
+    }).fail(function(text){
+      alert("Error: " + req.responseText);
+    });
+  }
+
+  //auto run after 2 seconds of no activity
+  var update = _.debounce(domarkdown, 2000);
+  
+  //register event
+  editor.on("change", update);
+  
+  //init on start
+  domarkdown();  
+});
+</script>
+
+<style type="text/css" media="screen">
+ 
+#editor { 
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 40%;
+  height: 100%;
+}
+
+iframe { 
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 60%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  z-index: 999999;
+}
+
+</style>
+</head>
+<body>
+
+
+<div id="editor">
+
+---
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r block2, message=FALSE, fig.width=8, fig.height=5, dev='svg'}
+library(ggpubr)
+data(ToothGrowth)
+my_comp <- combn(levels(factor( ToothGrowth$dose)), 2,  simplify = FALSE)
+
+ggboxplot(ToothGrowth, x = "dose", y = "len",
+  color = "dose", palette = "jco")+
+  stat_compare_means(comparisons = my_comp)+ 
+  stat_compare_means(label.y = 50)
+
+</div>
+
+<iframe src="about:blank"></iframe>
+
+</body>
+</html>

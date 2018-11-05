@@ -1,0 +1,11 @@
+Package: markdowngui
+Type: Package
+Title: Markdown GUI for OpenCPU
+Version: 1.2
+Date: 2018-01-15
+Author: Baohong Zhang
+Maintainer: Baohong Zhang <baohongz@gmail.com>
+Description: OpenCPU App for markdown package, modified from https://github.com/rwebapps/markdownapp
+License: Apache2
+Depends:
+    rmarkdown
