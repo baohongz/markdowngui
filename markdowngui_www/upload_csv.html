@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Uploading a CSV File</title>
     
 <script src="jquery-1.10.2.min.js"></script>
 <script src="opencpu-0.5.js"></script>
+</head>
 
 <script>
 $(function(){
@@ -71,14 +71,14 @@ printsummary(session);
 <h1>Uploading a CSV File</h1>
 
 <b>CSV File</b> <input type="file" id="csvfile"> 
-<br />
+<br/>
 
 <b>Header</b> <select id="header">
 <option>true</option>
 <option>false</option>
 </select> 
 
-<br />
+<br/>
 <button id="submitbutton" type="button">read.csv</button>
 
 <pre><code id="output"></code></pre>
