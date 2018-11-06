@@ -155,6 +155,8 @@ if(!window.jQuery) {
       var key = jqxhr.getResponseHeader('X-ocpu-session') || console.log("X-ocpu-session response header missing.");
       var txt = jqxhr.responseText;
 
+	  // Baohong
+      loc = new URL(loc).pathname;
       //in case of cors we translate relative paths to the target domain
       if(r_cors && loc.match("^/[^/]")){
         loc = r_path.protocol + "//" + r_path.host + loc;
