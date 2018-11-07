@@ -103,7 +103,6 @@ To work with R Markdown, if necessary:
 To run the basic working example that produced this blog post:
 
 * Open R Studio, and go to File - New - R Markdown
-* If necessary install `ggplot2` and `lattice` packages: `install.packages("ggplot2"); install.packages("lattice") `
 * Paste in the contents of this gist (which contains the R Markdown file used to produce this post) and save the file with an `.rmd` extension
 * Click Knit HTML
 
@@ -114,7 +113,6 @@ To run the basic working example that produced this blog post:
 ```{r }
 set.seed(1234)
 library(ggplot2)
-library(lattice)
 ```
 
 
@@ -182,14 +180,6 @@ Ggplot2 plots work well:
 qplot(x, y, data=df)
 ```
 
-### `lattice` plot
-As do lattice plots:
-
-```{r latticeex}
-xyplot(y~x)
-```
-
-Note that unlike traditional Sweave, there is no need to print lattice plots directly.
 
 ## R Code chunk features
 ### Create Markdown code from R
